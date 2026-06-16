@@ -17,7 +17,7 @@ A production-grade ML pipeline that predicts which bank customers are likely to 
 bankmind-ml/
 ├── data/
 │   └── bank-full.csv          # Raw dataset (download separately)
-├── models/                    # Generated after training
+├── models/                    # Pre-trained model artifacts (included)
 │   ├── baseline_model.pkl     # Logistic Regression pipeline
 │   ├── xgb_model.pkl          # XGBoost pipeline
 │   └── label_encoder.pkl      # Target label encoder
@@ -29,6 +29,7 @@ bankmind-ml/
 │   ├── train_baseline.py      # Logistic Regression training
 │   ├── train_tree.py          # XGBoost training
 │   └── evaluate.py            # Metrics, feature importance, sample predictions
+├── run_all.py                 # One-command pipeline runner
 ├── .gitignore
 ├── requirements.txt
 ├── README.md
@@ -56,7 +57,15 @@ pip install -r requirements.txt
 
 ## Usage
 
-Run the scripts in this order from the project root:
+### Quick Start (one command)
+
+```bash
+python run_all.py
+```
+
+This runs the entire pipeline: EDA → Train Baseline → Train XGBoost → Evaluate.
+
+### Step-by-Step (optional)
 
 ```bash
 # Step 1 — Exploratory Data Analysis
@@ -71,6 +80,8 @@ python -m src.train_tree
 # Step 4 — Evaluate both models
 python -m src.evaluate
 ```
+
+> **Note:** Pre-trained model files are included in `models/`. You can skip to Step 4 to see evaluation results immediately without retraining.
 
 ## Pipeline Architecture
 

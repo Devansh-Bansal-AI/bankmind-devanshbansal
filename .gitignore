@@ -18,8 +18,8 @@ data/*.txt
 data/__MACOSX/
 data/bank-additional/
 
-# Trained model artifacts (reproducible via training scripts)
-models/*.pkl
+# Trained model artifacts (keep for submission — required deliverable)
+# models/*.pkl
 
 # IDE / OS junk
 .vscode/

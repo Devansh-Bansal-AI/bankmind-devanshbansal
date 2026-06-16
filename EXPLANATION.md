@@ -29,7 +29,10 @@ The two most important features in the XGBoost model were:
 
 `contact_unknown` is highest because if the bank doesn't even have a valid contact method for the customer, the chance of them subscribing through a campaign is negligible — it's a strong negative signal. `poutcome_success` is the second because if a customer already subscribed in a previous campaign, they have a proven track record of converting. These two features essentially split customers into "unreachable / unlikely" vs. "has said yes before" — the most decisive information the model has.
 
+**Important caveat on `duration`:** The `duration` feature (call length) ranks 6th in importance at 0.041. However, the UCI dataset documentation explicitly warns: *"this attribute highly affects the output target... duration is not known before a call is performed."* In a real production model deployed to Relationship Managers *before* they make the call, `duration` would not exist as an input. Its presence here inflates model performance and constitutes a form of **data leakage**. For a truly production-ready system, the model should be retrained without `duration` and evaluated on its remaining features alone. I kept it here for benchmark comparability as the dataset authors intended, but any deployment would require its removal.
+
 ### 4. Why is F1 a better metric than accuracy for this particular dataset?
+
 
 Because the dataset is 88/12 imbalanced, accuracy rewards a model for simply predicting the majority class. F1-score is the harmonic mean of Precision and Recall — it forces the model to simultaneously:
 - **Precision**: not waste Relationship Managers' time on false positives
